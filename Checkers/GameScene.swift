@@ -9,37 +9,28 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    
+    var board : SKNode?
+    var manager : TileManager?
+    
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-        
-        self.addChild(myLabel)
+        board = SKNode()
+        board!.name = "Board"
+        let tileWidth : Int = 100
+        manager = TileManager(board: board!, tileWidth: tileWidth)
+        self.addChild(board!)
+        self.size = CGSizeMake(800, 800)
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
         for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
+            let touched = board!.nodeAtPoint((touch as UITouch).locationInNode(board!)) as SKNode
+            manager!.processTouch(touched)
         }
     }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
 }

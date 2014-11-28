@@ -19,15 +19,16 @@ class Checker{
     init(owner : Tile, player : Player){
         self.player = player
         self.node = SKShapeNode(circleOfRadius: 40)
-        self.node.fillColor = player.lightColor()
-        self.node.strokeColor = player.primaryColor()
+        self.node.fillColor = player.checkerFill()
+        self.node.strokeColor = player.checkerBorder()
         self.node.lineWidth = 10.0
         self.node.zPosition = 1
         self.owner = owner
         moveToTile(owner, animate: false)
     }
     
-    func moveToTile(tile : Tile, animate : Bool = true){
+    func moveToTile(tile : Tile, animate : Bool = true) -> NSTimeInterval{
+        self.owner.checker = nil
         self.owner = tile
         tile.checker = self
         node.name = tile.node.name
@@ -45,36 +46,11 @@ class Checker{
             node.zPosition = 2
             node.runAction(translate)
             node.runAction(scale)
+            return NSTimeInterval(duration)
         }
         else{
             node.position = newPosition
-        }
-    }
-    
-}
-
-enum Player{
-    
-    case One, Two
-    
-    func primaryColor() -> UIColor {
-        switch(self){
-            case .One: return UIColor(red: 0.667, green: 0.224, blue: 0.224, alpha: 1)
-            case .Two: return UIColor(red: 0.133, green: 0.4, blue: 0.4, alpha: 1)
-        }
-    }
-    
-    func lightColor() -> UIColor {
-        switch(self){
-            case .One: return UIColor(red: 0.831, green: 0.416, blue: 0.416, alpha: 1)
-            case .Two: return UIColor(red: 0.251, green: 0.498, blue: 0.498, alpha: 1)
-        }
-    }
-    
-    func darkColor() -> UIColor {
-        switch(self){
-            case .One: return UIColor(red: 0.502, green: 0.082, blue: 0.082, alpha: 1)
-            case .Two: return UIColor(red: 0.051, green: 0.302, blue: 0.302, alpha: 1)
+            return NSTimeInterval(0)
         }
     }
     

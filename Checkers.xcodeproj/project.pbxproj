@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E4ECE731A27FBA3001FDD1B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4ECE721A27FBA3001FDD1B /* GameState.swift */; };
 		2E7B0DD21A269AA3006936F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B0DD11A269AA3006936F0 /* AppDelegate.swift */; };
 		2E7B0DD41A269AA3006936F0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2E7B0DD31A269AA3006936F0 /* GameScene.sks */; };
 		2E7B0DD61A269AA3006936F0 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B0DD51A269AA3006936F0 /* GameScene.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E4ECE721A27FBA3001FDD1B /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		2E7B0DCC1A269AA3006936F0 /* Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E7B0DD01A269AA3006936F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E7B0DD11A269AA3006936F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				2E7B0DF61A269B38006936F0 /* Tile.swift */,
 				2E7B0DF81A269B77006936F0 /* Checker.swift */,
+				2E4ECE721A27FBA3001FDD1B /* GameState.swift */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				2E7B0DD61A269AA3006936F0 /* GameScene.swift in Sources */,
 				2E7B0DD81A269AA3006936F0 /* GameViewController.swift in Sources */,
 				2E7B0DD21A269AA3006936F0 /* AppDelegate.swift in Sources */,
+				2E4ECE731A27FBA3001FDD1B /* GameState.swift in Sources */,
 				2E7B0DF91A269B77006936F0 /* Checker.swift in Sources */,
 				2E7B0DF71A269B38006936F0 /* Tile.swift in Sources */,
 			);
@@ -429,6 +433,7 @@
 				2E7B0DF11A269AA3006936F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2E7B0DF21A269AA3006936F0 /* Build configuration list for PBXNativeTarget "CheckersTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +442,7 @@
 				2E7B0DF41A269AA3006936F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

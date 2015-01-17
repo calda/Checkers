@@ -64,21 +64,49 @@ class TileManager {
                     if var previousFocus = focusedTile {
                         previousFocus.colorMoveChoices(TileColor.Dark.color)
                     }
-                    let moveOptionCount = touched.colorMoveChoices(checker.player.tileFill())
-                    if moveOptionCount > 0 {
-                        focusedTile = touched
-                    }
+                    touched.colorMoveChoices(checker.player.tileFill())
+                    focusedTile = touched
                 }
             }
             //player touched tinted tile
             if ("Optional(\(touched.node.fillColor))") == ("\(currentPlayer?.tileFill())") {
                 if var checker = focusedTile?.checker? {
-                    var toResetColor = checker.owner.getValidMoveOptions()
-                    //TODO: add jump call
-                    for (tile, _) in checker.owner.getValidJumpOptions(player: checker.player, isKing: checker.king) {
+                    let validMoves = checker.owner.getValidMoveOptions()
+                    let validJumps = checker.owner.getValidJumpOptions(player: checker.player, isKing: checker.king)
+                    var toResetColor = Array(validMoves)
+                    for (tile, _) in validJumps {
                         toResetColor.append(tile)
                     }
-                    let animationDuration = checker.moveToTile(touched, animate: true)
+                    var animationDuration = NSTimeInterval(0)
+                    //check if regular jump
+                    for move in validMoves {
+                        if move.col == touched.col && move.row == touched.row {
+                            animationDuration = checker.moveToTile(touched, animate: true)
+                            break;
+                        }
+                    }
+                    //move is a jump
+                    if animationDuration == NSTimeInterval(0) {
+                        for (final, thru) in validJumps {
+                            if final.col == touched.col && final.row == touched.row {
+                                var queue = Array(thru)
+                                queue.append(final)
+                                var jumpPath : [(jump: Tile, over: Tile)] = []
+                                for i in 0...(queue.count - 1) {
+                                    let previous : Tile = (i == 0 ? focusedTile! : queue[i - 1])
+                                    let moveTo = queue[i]
+                                    let betweenRow = Int((previous.row + moveTo.row) / 2)
+                                    let betweenCol = Int((previous.col + moveTo.col) / 2)
+                                    if let betweenTile = getTile(row: betweenRow, col: betweenCol) {
+                                        jumpPath.append(jump: moveTo, over: betweenTile)
+                                    }
+                                }
+                                animationDuration = checker.jumpAlongPath(jumpPath)
+                                break;
+                            }
+                        }
+                    }
+                    
                     for tile in toResetColor {
                         fadeNode(tile.node, toColor: tile.tileColor.color, inDuration: CGFloat(animationDuration))
                     }

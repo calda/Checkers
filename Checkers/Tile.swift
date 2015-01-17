@@ -74,7 +74,9 @@ class Tile {
                 if validTarget.checker == nil && through!.checker?.player == player.other() {
                     var previousSteps : [Tile] = []
                     validJumpOptions.extend([(validTarget, previousSteps)])
-                    previousSteps.append(self)
+                    if through != nil {
+                        previousSteps.append(validTarget)
+                    }
                     for (multiJump, otherSteps) in validTarget.getValidJumpOptions(player: player, isKing: isKing){
                         previousSteps.extend(otherSteps)
                         validJumpOptions.extend([(multiJump, previousSteps)])

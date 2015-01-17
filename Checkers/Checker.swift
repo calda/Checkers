@@ -56,13 +56,13 @@ class Checker{
         var startTile = self.owner
         var totalDuration : NSTimeInterval = 0
         var actions : [SKAction] = []
-        for i in 0...path.count {
-            var animationDuration = moveToTile(path[i].jump, animate: false)
+        for (jump, over) in path {
+            var animationDuration = moveToTile(jump, animate: false)
             totalDuration += animationDuration
             actions.append(SKAction.sequence([
-                SKAction.runBlock({ let time = self.moveToTile(path[i].jump) }),
-                SKAction.runBlock({ path[i].over.checker!.node.runAction(SKAction.scaleBy(0.01, duration: animationDuration)) }),
-                SKAction.runBlock({ path[i].over.checker = nil }),
+                SKAction.runBlock({ let time = self.moveToTile(jump) }),
+                SKAction.runBlock({ over.checker!.node.runAction(SKAction.scaleBy(0.01, duration: animationDuration)) }),
+                SKAction.runBlock({ over.checker = nil }),
                 SKAction.waitForDuration(animationDuration)
             ]))
         }

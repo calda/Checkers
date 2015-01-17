@@ -10,5 +10,16 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "Checkers.Checker.(jumpAlongPath (Checkers.Checker) -&gt; (Swift.Array&lt;(jump : Checkers.Tile, over : Checkers.Tile)&gt;) -&gt; Swift.Double).(closure #2):Checker.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Checkers.TileManager.processTouch (Checkers.TileManager)(ObjectiveC.SKNode) -&gt; ():TileManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
